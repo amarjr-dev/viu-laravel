@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-03-14
+
+### Fixed
+
+- **ViuMonologHandler** — adicionado `IntrospectionProcessor` para capturar automaticamente `file` e `line` de onde o log foi chamado na aplicação, ignorando internals do SDK, Monolog e Laravel. Resolve logs chegando com `file: ""` e `line: 0`.
+
 ## [0.1.0] - 2026-03-13
 
 ### Added

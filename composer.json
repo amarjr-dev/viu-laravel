@@ -2,7 +2,7 @@
     "name": "viu/viu-laravel",
     "description": "Laravel SDK for Viu logging platform — Monolog Handler, Facade, HTTP/Kafka transport",
     "type": "library",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "keywords": ["viu", "logging", "laravel", "monolog", "kafka", "observability", "loki"],
     "license": "MIT",
     "authors": [

@@ -7,6 +7,7 @@ namespace Viu\ViuLaravel\Handlers;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
+use Monolog\Processor\IntrospectionProcessor;
 use Viu\ViuLaravel\Contracts\HttpClientInterface;
 use Viu\ViuLaravel\Kafka\KafkaProducer;
 use Viu\ViuLaravel\ViuConfig;
@@ -41,6 +42,18 @@ final class ViuMonologHandler extends AbstractProcessingHandler
         bool $bubble = true,
     ) {
         parent::__construct($level, $bubble);
+
+        // Captura automaticamente o arquivo e linha de onde o log foi chamado,
+        // ignorando internals do SDK, Monolog e Laravel para apontar ao código da aplicação.
+        $this->pushProcessor(new IntrospectionProcessor(
+            Level::Debug,
+            [
+                'Viu\\ViuLaravel\\',
+                'Monolog\\',
+                'Illuminate\\Log\\',
+                'Illuminate\\Support\\Facades\\',
+            ]
+        ));
 
         // Garante flush ao final da requisição (inclusive em contextos não-OOP como scripts CLI)
         register_shutdown_function([$this, 'flushBatch']);
